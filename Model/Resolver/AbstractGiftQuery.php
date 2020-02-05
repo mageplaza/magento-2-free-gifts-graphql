@@ -28,13 +28,12 @@ use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Framework\GraphQl\Exception\GraphQlInputException;
 use Magento\Quote\Model\Quote\ItemFactory as QuoteItemFactory;
 use Mageplaza\FreeGifts\Api\ProductGiftInterface;
-use Mageplaza\FreeGifts\Helper\Rule as HelperRule;
 
 /**
- * Class AbstractGift
+ * Class AbstractGiftQuery
  * @package Mageplaza\FreeGiftsGraphQL\Model\Resolver
  */
-abstract class AbstractGift
+abstract class AbstractGiftQuery
 {
     /**
      * @var ProductGiftInterface
@@ -42,14 +41,14 @@ abstract class AbstractGift
     protected $_productGift;
     
     /**
-     * @var HelperRule
-     */
-    protected $_helperRule;
-    
-    /**
      * @var ProductRepositoryInterface
      */
     protected $_productRepository;
+    
+    /**
+     * @var QuoteItemFactory
+     */
+    protected $_quoteItemFactory;
     
     /**
      * @var string
@@ -62,25 +61,17 @@ abstract class AbstractGift
     protected $_quoteItem;
     
     /**
-     * @var QuoteItemFactory
-     */
-    protected $_quoteItemFactory;
-    
-    /**
      * AbstractGift constructor.
      * @param ProductGiftInterface $productGift
-     * @param HelperRule $helperRule
      * @param QuoteItemFactory $quoteItemFactory
      * @param ProductRepositoryInterface $productRepository
      */
     public function __construct(
         ProductGiftInterface $productGift,
-        HelperRule $helperRule,
         QuoteItemFactory $quoteItemFactory,
         ProductRepositoryInterface $productRepository
     ) {
         $this->_productGift = $productGift;
-        $this->_helperRule = $helperRule;
         $this->_quoteItemFactory = $quoteItemFactory;
         $this->_productRepository = $productRepository;
     }
