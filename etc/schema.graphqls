@@ -1,0 +1,47 @@
+# Mageplaza
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Mageplaza.com license that is
+# available through the world-wide-web at this URL:
+# https://www.mageplaza.com/LICENSE.txt
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade this extension to newer
+# version in the future.
+#
+# @category    Mageplaza
+# @package     Mageplaza_FreeGiftsGraphQl
+# @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+# @license     https://www.mageplaza.com/LICENSE.txt
+
+type Query {
+    mpFreeGiftsByProductSku(
+        sku: String! @doc(description: "Product SKU")
+    ):[Rule] @resolver(class: "\\Mageplaza\\FreeGiftsGraphQl\\Model\\Resolver\\GiftByProductSku") @doc(description: "Get free gift list by product sku")
+    mpFreeGiftsByQuoteItem(
+        itemId: Int! @doc(description: "Quote item id")
+    ):[Rule] @resolver(class: "\\Mageplaza\\FreeGiftsGraphQl\\Model\\Resolver\\GiftByQuoteItem") @doc(description: "Get free gift list by quote item id")
+}
+
+type Rule {
+    rule_id: String @doc(description: "Free gift rule id")
+    auto_add: Int @doc(description: "Free gift rule type")
+    max_gift: Int @doc(description: "Maximum number of allowed gifts")
+    gifts: [Gift] @doc(description: "Free gift list")
+    notice: String @doc(description: "Free gift rule notice")
+    total_added: Int @doc(description: "Number of gifts added to current quote")
+}
+
+type Gift {
+    id: Int @doc(description: "Free gift id")
+    name: String @doc(description: "Free gift name")
+    gift_price: String @doc(description: "Free gift price")
+    free_ship: Int @doc(description: "Whether free gift has free shipping")
+    added: Boolean @doc(description: "Whether free gift is added to curreny quote")
+    configurable: Boolean @doc(description: "Whether free gift is a configurable product")
+    required_option: Boolean @doc(description: "Whether free gift required custom option")
+    final_price:String @doc(description: "Free gift acutal price")
+    image: String @doc(description: "Free gift image URL")
+}
