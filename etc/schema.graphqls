@@ -30,6 +30,11 @@ type Mutation {
         quoteId: Int! @doc(description: "Quote id")
         itemId: Int! @doc(description: "Quote item id")
     ): Boolean @resolver(class: "\\Mageplaza\\FreeGiftsGraphQl\\Model\\Resolver\\DeleteByQuoteItem") @doc(description:"Delete gift by quote id and quote item id")
+    mpFreeGiftsAddByGiftId (
+        quoteId: Int! @doc(description: "Quote id")
+        ruleId: Int! @doc(description: "Rule id")
+        giftId: Int! @doc(description: "Gift id")
+    ): AddedGiftItem @resolver(class: "\\Mageplaza\\FreeGiftsGraphQl\\Model\\Resolver\\AddByGiftId") @doc(description:"Add gift to quote by quote id, rule id and gift id")
 }
 
 type Rule {
@@ -51,4 +56,14 @@ type Gift {
     required_option: Boolean @doc(description: "Whether free gift required custom option")
     final_price:String @doc(description: "Free gift acutal price")
     image: String @doc(description: "Free gift image URL")
+}
+
+type AddedGiftItem {
+    item_id:  Int @doc(description: "Added gift item id")
+    sku:  String @doc(description: "Added gift item SKU")
+    qty:  Int @doc(description: "Added gift item quantity")
+    name:  String @doc(description: "Added gift item name")
+    product_type:  String @doc(description: "Added gift item product type")
+    quote_id:  String @doc(description: "Added gift item quote id")
+    rule_id: String @doc(description: "Added gift item rule id")
 }

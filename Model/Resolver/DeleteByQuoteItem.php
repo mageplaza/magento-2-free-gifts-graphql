@@ -27,13 +27,29 @@ use Magento\Framework\GraphQl\Config\Element\Field;
 use Magento\Framework\GraphQl\Exception\GraphQlInputException;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
+use Mageplaza\FreeGifts\Api\ProductGiftInterface;
 
 /**
  * Class DeleteByQuoteItem
  * @package Mageplaza\FreeGiftsGraphQL\Model\Resolver
  */
-class DeleteByQuoteItem extends AbstractGiftMutation implements ResolverInterface
+class DeleteByQuoteItem implements ResolverInterface
 {
+    /**
+     * @var ProductGiftInterface
+     */
+    protected $_productGift;
+    
+    /**
+     * DeleteByQuoteItem constructor.
+     * @param ProductGiftInterface $productGift
+     */
+    public function __construct(
+        ProductGiftInterface $productGift
+    ) {
+        $this->_productGift = $productGift;
+    }
+    
     /**
      * @inheritDoc
      */
@@ -41,8 +57,9 @@ class DeleteByQuoteItem extends AbstractGiftMutation implements ResolverInterfac
     {
         $this->validateArgs($args);
         $result = $this->_productGift->deleteGiftByQuoteItemId($args['quoteId'], $args['itemId']);
-        if (isset($result[0]['error'])) {
-            throw new GraphQlInputException($result[0]['message']);
+        $result = is_array($result) ? reset($result): $result;
+        if (isset($result['error'])) {
+            throw new GraphQlInputException($result['message']);
         }
         
         return true;
