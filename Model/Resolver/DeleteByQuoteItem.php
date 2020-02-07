@@ -21,7 +21,7 @@
 
 declare(strict_types=1);
 
-namespace Mageplaza\FreeGiftsGraphQL\Model\Resolver;
+namespace Mageplaza\FreeGiftsGraphQl\Model\Resolver;
 
 use Magento\Framework\GraphQl\Config\Element\Field;
 use Magento\Framework\GraphQl\Exception\GraphQlInputException;
@@ -31,7 +31,7 @@ use Mageplaza\FreeGifts\Api\ProductGiftInterface;
 
 /**
  * Class DeleteByQuoteItem
- * @package Mageplaza\FreeGiftsGraphQL\Model\Resolver
+ * @package Mageplaza\FreeGiftsGraphQl\Model\Resolver
  */
 class DeleteByQuoteItem implements ResolverInterface
 {

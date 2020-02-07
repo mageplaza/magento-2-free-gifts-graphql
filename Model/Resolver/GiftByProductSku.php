@@ -21,7 +21,7 @@
 
 declare(strict_types=1);
 
-namespace Mageplaza\FreeGiftsGraphQL\Model\Resolver;
+namespace Mageplaza\FreeGiftsGraphQl\Model\Resolver;
 
 use Magento\Framework\GraphQl\Config\Element\Field;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
@@ -29,7 +29,7 @@ use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 
 /**
  * Class GiftByProductSku
- * @package Mageplaza\FreeGiftsGraphQL\Model\Resolver
+ * @package Mageplaza\FreeGiftsGraphQl\Model\Resolver
  */
 class GiftByProductSku extends AbstractGiftQuery implements ResolverInterface
 {

@@ -21,7 +21,7 @@
 
 declare(strict_types=1);
 
-namespace Mageplaza\FreeGiftsGraphQL\Model\Resolver;
+namespace Mageplaza\FreeGiftsGraphQl\Model\Resolver;
 
 use Exception;
 use Magento\Catalog\Api\ProductRepositoryInterface;
@@ -31,7 +31,7 @@ use Mageplaza\FreeGifts\Api\ProductGiftInterface;
 
 /**
  * Class AbstractGiftQuery
- * @package Mageplaza\FreeGiftsGraphQL\Model\Resolver
+ * @package Mageplaza\FreeGiftsGraphQl\Model\Resolver
  */
 abstract class AbstractGiftQuery
 {
