@@ -31,7 +31,7 @@ use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
  * Class GiftByProductSku
  * @package Mageplaza\FreeGiftsGraphQL\Model\Resolver
  */
-class GiftQueryByProductSku extends AbstractGiftQuery implements ResolverInterface
+class GiftByProductSku extends AbstractGiftQuery implements ResolverInterface
 {
     /**
      * @inheritDoc

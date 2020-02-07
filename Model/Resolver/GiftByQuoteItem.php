@@ -11,7 +11,7 @@ use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
  * Class GiftByQuoteItem
  * @package Mageplaza\FreeGiftsGraphQL\Model\Resolver
  */
-class GiftQueryByQuoteItem extends AbstractGiftQuery implements ResolverInterface
+class GiftByQuoteItem extends AbstractGiftQuery implements ResolverInterface
 {
     /**
      * @inheritDoc
