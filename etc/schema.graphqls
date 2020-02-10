@@ -51,10 +51,10 @@ type Gift {
     name: String @doc(description: "Free gift name")
     gift_price: String @doc(description: "Free gift price")
     free_ship: Int @doc(description: "Whether free gift has free shipping")
-    added: Boolean @doc(description: "Whether free gift is added to curreny quote")
+    added: Boolean @doc(description: "Whether free gift is added to current quote")
     configurable: Boolean @doc(description: "Whether free gift is a configurable product")
-    required_option: Boolean @doc(description: "Whether free gift required custom option")
-    final_price:String @doc(description: "Free gift acutal price")
+    required_option: Boolean @doc(description: "Whether free gift requires custom option")
+    final_price:String @doc(description: "Free gift actual price")
     image: String @doc(description: "Free gift image URL")
 }
 
