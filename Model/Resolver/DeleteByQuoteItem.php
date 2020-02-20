@@ -70,9 +70,8 @@ class DeleteByQuoteItem implements ResolverInterface
         $cart = $this->_getCartForUser->execute($maskedCartId, $context->getUserId(), $storeId);
         
         $result = $this->_productGift->deleteGiftByQuoteItemId($cart->getId(), $args['item_id']);
-        $result = is_array($result) ? reset($result): $result;
-        if (isset($result['error'])) {
-            throw new GraphQlInputException($result['message']);
+        if (is_object($result) && $result->getStatus() === 'error') {
+            throw new GraphQlInputException($result->getMessage());
         }
         
         return true;
