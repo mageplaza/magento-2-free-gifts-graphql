@@ -38,9 +38,9 @@ class GiftByProductSku extends AbstractGiftQuery implements ResolverInterface
      */
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
-        $this->_productSku = 1;
+        $this->_productSkuFlag = 1;
         $this->validateArgs($args);
         
-        return $this->_productGift->getGiftsByProductSku($this->_productSku);
+        return $this->_productGift->getGiftsByProductSku($this->_productSkuFlag);
     }
 }

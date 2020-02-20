@@ -51,14 +51,14 @@ abstract class AbstractGiftQuery
     protected $_quoteItemFactory;
     
     /**
-     * @var string
+     * @var int
      */
-    protected $_productSku;
+    protected $_productSkuFlag;
     
     /**
      * @var int
      */
-    protected $_quoteItem;
+    protected $_quoteItemFlag;
     
     /**
      * AbstractGift constructor.
@@ -83,23 +83,23 @@ abstract class AbstractGiftQuery
      */
     protected function validateArgs(array $args)
     {
-        if ($this->_quoteItem && !isset($args['itemId'])) {
+        if ($this->_quoteItemFlag && !isset($args['itemId'])) {
             throw new GraphQlInputException(__('Quote item id is required.'));
         }
-        if ($this->_quoteItem) {
+        if ($this->_quoteItemFlag) {
             $quoteItem = $this->_quoteItemFactory->create();
-            $this->_quoteItem = $quoteItem->load($args['itemId'])->getItemId();
-            if (!$this->_quoteItem) {
+            $this->_quoteItemFlag = $quoteItem->load($args['itemId'])->getItemId();
+            if (!$this->_quoteItemFlag) {
                 throw new GraphQlInputException(__('This quote item does not exist.'));
             }
         }
         
-        if ($this->_productSku && !isset($args['sku'])) {
+        if ($this->_productSkuFlag && !isset($args['sku'])) {
             throw new GraphQlInputException(__('Product SKU is required.'));
         }
-        if ($this->_productSku) {
+        if ($this->_productSkuFlag) {
             try {
-                $this->_productSku = $this->_productRepository->get($args['sku'])->getSku();
+                $this->_productSkuFlag = $this->_productRepository->get($args['sku'])->getSku();
             } catch (Exception $e) {
                 throw new GraphQlInputException(__($e->getMessage()));
             }

@@ -58,7 +58,7 @@ class AddByGiftId implements ResolverInterface
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
         $this->validateArgs($args);
-        $result = $this->_productGift->addGiftById($args['quoteId'], $args['ruleId'], $args['giftId']);
+        $result = $this->_productGift->addGift($args['quoteId'], $args['ruleId'], $args['giftId']);
         if (is_array($result) && isset($result[0]['error'])) {
             throw new GraphQlInputException($result[0]['message']);
         }

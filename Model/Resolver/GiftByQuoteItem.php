@@ -18,9 +18,9 @@ class GiftByQuoteItem extends AbstractGiftQuery implements ResolverInterface
      */
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
-        $this->_quoteItem = 1;
+        $this->_quoteItemFlag = 1;
         $this->validateArgs($args);
         
-        return $this->_productGift->getGiftsByQuoteItemId($this->_quoteItem);
+        return $this->_productGift->getGiftsByQuoteItemId($this->_quoteItemFlag);
     }
 }
