@@ -83,12 +83,12 @@ abstract class AbstractGiftQuery
      */
     protected function validateArgs(array $args)
     {
-        if ($this->_quoteItemFlag && !isset($args['itemId'])) {
+        if ($this->_quoteItemFlag && !isset($args['item_id'])) {
             throw new GraphQlInputException(__('Quote item id is required.'));
         }
         if ($this->_quoteItemFlag) {
             $quoteItem = $this->_quoteItemFactory->create();
-            $this->_quoteItemFlag = $quoteItem->load($args['itemId'])->getItemId();
+            $this->_quoteItemFlag = $quoteItem->load($args['item_id'])->getItemId();
             if (!$this->_quoteItemFlag) {
                 throw new GraphQlInputException(__('This quote item does not exist.'));
             }

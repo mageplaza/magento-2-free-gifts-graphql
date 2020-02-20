@@ -21,20 +21,18 @@ type Query {
         sku: String! @doc(description: "Product SKU")
     ):[Rule] @resolver(class: "\\Mageplaza\\FreeGiftsGraphQl\\Model\\Resolver\\GiftByProductSku") @doc(description: "Get free gift list by product sku")
     mpFreeGiftsByQuoteItem(
-        itemId: Int! @doc(description: "Quote item id")
+        item_id: Int! @doc(description: "Quote item id")
     ):[Rule] @resolver(class: "\\Mageplaza\\FreeGiftsGraphQl\\Model\\Resolver\\GiftByQuoteItem") @doc(description: "Get free gift list by quote item id")
 }
 
 type Mutation {
     mpFreeGiftsDeleteByQuoteItem (
-        quoteId: Int! @doc(description: "Quote id")
-        itemId: Int! @doc(description: "Quote item id")
+        cart_id: String! @doc(description: "Masked Cart id")
+        item_id: Int! @doc(description: "Quote item id")
     ): Boolean @resolver(class: "\\Mageplaza\\FreeGiftsGraphQl\\Model\\Resolver\\DeleteByQuoteItem") @doc(description:"Delete gift by quote id and quote item id")
-    mpFreeGiftsAddByGiftId (
-        quoteId: Int! @doc(description: "Quote id")
-        ruleId: Int! @doc(description: "Rule id")
-        giftId: Int! @doc(description: "Gift id")
-    ): AddedGiftItem @resolver(class: "\\Mageplaza\\FreeGiftsGraphQl\\Model\\Resolver\\AddByGiftId") @doc(description:"Add gift to quote by quote id, rule id and gift id")
+    mpFreeGiftsAddGift (
+        input: AddGiftInput!
+    ): AddedGiftOutput @resolver(class: "\\Mageplaza\\FreeGiftsGraphQl\\Model\\Resolver\\AddGift") @doc(description:"Add gift to quote by quote id, rule id and gift id")
 }
 
 type Rule {
@@ -58,12 +56,23 @@ type Gift {
     image: String @doc(description: "Free gift image URL")
 }
 
-type AddedGiftItem {
-    item_id:  Int @doc(description: "Added gift item id")
-    sku:  String @doc(description: "Added gift item SKU")
-    qty:  Int @doc(description: "Added gift item quantity")
-    name:  String @doc(description: "Added gift item name")
-    product_type:  String @doc(description: "Added gift item product type")
-    quote_id:  String @doc(description: "Added gift item quote id")
+type AddedGiftOutput {
+    status: String @doc(description: "Added gift item status")
+    message: String @doc(description: "Added gift item message")
     rule_id: String @doc(description: "Added gift item rule id")
+    quote_id: String @doc(description: "Added gift item quote id")
+    quote_item_id: String @doc(description: "Added gift item quote item id")
+    product_gift_id: String @doc(description: "Added gift item product gift id")
+}
+
+input AddGiftInput {
+    cart_id: String! @doc(description: "Masked Cart id")
+    rule_id: Int! @doc(description: "Rule id")
+    gift_id: Int! @doc(description: "Gift id")
+    configurable_options: [ConfigurableOptions] @doc(description: "Gift Configurable Options")
+}
+
+input ConfigurableOptions {
+    option_id: Int! @doc(description: "Gift Configurable Option Id"),
+    option_value: Int! @doc(description: "Gift Configurable Option Value"),
 }
