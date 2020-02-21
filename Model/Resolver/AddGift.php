@@ -27,7 +27,7 @@ use Magento\Framework\GraphQl\Config\Element\Field;
 use Magento\Framework\GraphQl\Exception\GraphQlInputException;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
-use Magento\QuoteGraphQl\Model\Cart\GetCartForUser;
+use Mageplaza\FreeGiftsGraphQl\Model\Data\MaskedCart;
 use Mageplaza\FreeGifts\Api\Data\AddGiftItemInterface;
 use Mageplaza\FreeGifts\Api\ProductGiftInterface;
 use Mageplaza\FreeGifts\Api\Data\AddGiftItemInterfaceFactory;
@@ -62,9 +62,9 @@ class AddGift implements ResolverInterface
     protected $_ConfigurableItemOption;
     
     /**
-     * @var GetCartForUser
+     * @var MaskedCart
      */
-    protected $_getCartForUser;
+    protected $_maskedCart;
     
     /**
      * AddByGiftId constructor.
@@ -72,20 +72,20 @@ class AddGift implements ResolverInterface
      * @param AddGiftItemInterfaceFactory $addGiftItem
      * @param ConfigurableItemOptionValueInterfaceFactory $configurableItemOption
      * @param ProductOptionInterfaceFactory $productOption
-     * @param GetCartForUser $getCartForUser
+     * @param MaskedCart $maskedCart
      */
     public function __construct(
         ProductGiftInterface $productGift,
         AddGiftItemInterfaceFactory $addGiftItem,
         ConfigurableItemOptionValueInterfaceFactory $configurableItemOption,
         ProductOptionInterfaceFactory $productOption,
-        GetCartForUser $getCartForUser
+        MaskedCart $maskedCart
     ) {
         $this->_productGift = $productGift;
         $this->_addGiftItem = $addGiftItem;
         $this->_ConfigurableItemOption = $configurableItemOption;
         $this->_productOption = $productOption;
-        $this->_getCartForUser = $getCartForUser;
+        $this->_maskedCart = $maskedCart;
     }
     
     /**
@@ -144,8 +144,7 @@ class AddGift implements ResolverInterface
         $productOptionExt = $productOption->getExtensionAttributes();
         
         try {
-            $storeId = (int) $context->getExtensionAttributes()->getStore()->getId();
-            $cart = $this->_getCartForUser->execute($data['cart_id'], $context->getUserId(), $storeId);
+            $cart = $this->_maskedCart->getCartByMaskedId((string) $data['cart_id'], $context->getUserId());
         } catch (\Exception $e) {
             throw new GraphQlInputException(__($e->getMessage()));
         }

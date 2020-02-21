@@ -27,7 +27,7 @@ use Magento\Framework\GraphQl\Config\Element\Field;
 use Magento\Framework\GraphQl\Exception\GraphQlInputException;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
-use Magento\QuoteGraphQl\Model\Cart\GetCartForUser;
+use Mageplaza\FreeGiftsGraphQl\Model\Data\MaskedCart;
 use Mageplaza\FreeGifts\Api\ProductGiftInterface;
 
 /**
@@ -42,21 +42,21 @@ class DeleteByQuoteItem implements ResolverInterface
     protected $_productGift;
     
     /**
-     * @var GetCartForUser
+     * @var MaskedCart
      */
-    protected $_getCartForUser;
+    protected $_maskedCart;
     
     /**
      * DeleteByQuoteItem constructor.
      * @param ProductGiftInterface $productGift
-     * @param GetCartForUser $getCartForUser
+     * @param MaskedCart $maskedCart
      */
     public function __construct(
         ProductGiftInterface $productGift,
-        GetCartForUser $getCartForUser
+        MaskedCart $maskedCart
     ) {
         $this->_productGift = $productGift;
-        $this->_getCartForUser = $getCartForUser;
+        $this->_maskedCart = $maskedCart;
     }
     
     /**
@@ -65,11 +65,9 @@ class DeleteByQuoteItem implements ResolverInterface
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
         $this->validateArgs($args);
-        $maskedCartId = $args['cart_id'];
-        $storeId = (int) $context->getExtensionAttributes()->getStore()->getId();
-        $cart = $this->_getCartForUser->execute($maskedCartId, $context->getUserId(), $storeId);
-        
+        $cart = $this->_maskedCart->getCartByMaskedId((string) $args['cart_id'], $context->getUserId());
         $result = $this->_productGift->deleteGiftByQuoteItemId($cart->getId(), $args['item_id']);
+        
         if (is_object($result) && $result->getStatus() === 'error') {
             throw new GraphQlInputException($result->getMessage());
         }
