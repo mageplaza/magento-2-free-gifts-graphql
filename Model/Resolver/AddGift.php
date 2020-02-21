@@ -144,7 +144,7 @@ class AddGift implements ResolverInterface
         $productOptionExt = $productOption->getExtensionAttributes();
         
         try {
-            $cart = $this->_maskedCart->getCartByMaskedId((string) $data['cart_id'], $context->getUserId());
+            $cart = $this->_maskedCart->getCartByMaskedId((string) $data['cart_id'], $context);
         } catch (\Exception $e) {
             throw new GraphQlInputException(__($e->getMessage()));
         }

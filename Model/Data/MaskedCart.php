@@ -62,7 +62,7 @@ class MaskedCart
     
     /**
      * @param string $maskedId
-     * @param ContextInterface$context
+     * @param ContextInterface $context
      * @return Quote
      * @throws NoSuchEntityException
      * @throws GraphQlAuthorizationException
