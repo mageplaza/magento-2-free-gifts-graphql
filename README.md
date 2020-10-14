@@ -1,4 +1,4 @@
-# Free Gifts GraphQl Extension
+# Magento 2 Free Gifts GraphQL / PWA (FREE)
 
 ## How to install
 Run the following command in Magento 2 root folder:
@@ -13,8 +13,7 @@ php bin/magento setup:static-content:deploy
 
  To start using **Freegifts GraphQL** in your Magento 2 store, you need to:
  
-- Use Magento 2.3.x. Return your site to developer mode
-- Install [chrome extension](https://chrome.google.com/webstore/detail/chromeiql/fkkiamalmpiidkljmicmjfbieiclmeij?hl=en) (currently does not support other browsers)
+- Use Magento 2.3.x or higher. Return your site to developer mode
 - Set **GraphQL endpoint** as `http://<magento2-3-server>/graphql` in url box, click **Set endpoint**. (e.g. http://develop.mageplaza.com/graphql/ce232/graphql)
 - Perform a query in the left cell then click the **Run** button or **Ctrl + Enter** to see the result in the right cell
 - Currently, Mageplaza Free Gifts extension support the following queries and mutations:
