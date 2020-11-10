@@ -23,6 +23,7 @@ type Query {
     mpFreeGiftsByQuoteItem(
         item_id: Int! @doc(description: "Quote item id")
     ):[Rule] @resolver(class: "\\Mageplaza\\FreeGiftsGraphQl\\Model\\Resolver\\GiftByQuoteItem") @doc(description: "Get free gift list by quote item id")
+    mpFreeGiftsConfigs: ConfigOutput @resolver(class: "\\Mageplaza\\FreeGiftsGraphQl\\Model\\Resolver\\Configs") @doc(description: "Query to get config of Free Gifts.")
 }
 
 type Mutation {
@@ -52,6 +53,7 @@ type Gift {
     added: Boolean @doc(description: "Whether free gift is added to current quote")
     configurable: Boolean @doc(description: "Whether free gift is a configurable product")
     required_option: Boolean @doc(description: "Whether free gift requires custom option")
+    sku: String @doc(description: "SKU of the free gift")
     final_price:String @doc(description: "Free gift actual price")
     image: String @doc(description: "Free gift image URL")
 }
@@ -75,4 +77,29 @@ input AddGiftInput {
 input ConfigurableOptions {
     option_id: Int! @doc(description: "Gift Configurable Option Id"),
     option_value: Int! @doc(description: "Gift Configurable Option Value"),
+}
+
+type ConfigOutput {
+    general: GeneralOutput @doc(description: "The General config output")
+    display: DisplayOutput @doc(description: "The Display config output")
+    design: DesignOutput @doc(description: "The Design config output")
+}
+
+type GeneralOutput {
+    gift_layout: String @doc(description: "Gift layout")
+    allow_notice: Boolean @doc(description: "Allow notice")
+    notice: String @doc(description: "Notice message")
+    icon: String @doc(description: "Icon")
+}
+
+type DisplayOutput {
+    cart_page: Boolean @doc(description: "Display on cart page")
+    cart_item: Boolean @doc(description: "Display on cart item")
+    product_page: Boolean @doc(description: "Display on product page")
+}
+
+type DesignOutput {
+    label: String @doc(description: "Label")
+    background_color: String @doc(description: "Background color")
+    text_color: String @doc(description: "Text color")
 }
