@@ -36,9 +36,33 @@ type Mutation {
     ): AddedGiftOutput @resolver(class: "\\Mageplaza\\FreeGiftsGraphQl\\Model\\Resolver\\AddGift") @doc(description:"Add gift to quote by quote id, rule id and gift id")
 }
 
+type Cart {
+    mp_free_gifts: [Rule] @doc(description: "Mageplaza Free Gifts Rule Information") @resolver(class: "\\Mageplaza\\FreeGiftsGraphQl\\Model\\Resolver\\AddMpFreeGifts")
+    mp_free_gifts_button: FreeGiftsButton @doc(description: "Mageplaza Free Gifts Cart Rule Information") @resolver(class: "\\Mageplaza\\FreeGiftsGraphQl\\Model\\Resolver\\AddMpFreeGiftsButton")
+}
+
+interface CartItemInterface {
+    mp_free_gifts: FreeGiftItem @doc(description: "Mageplaza Free Gift Item") @resolver(class: "\\Mageplaza\\FreeGiftsGraphQl\\Model\\Resolver\\FreeGiftsItem")
+}
+
+type FreeGiftItem {
+    is_free_gift: Boolean @doc(description: "Is Free Gift Item?")
+    rule_id: String @doc(description: "Free gift rule id")
+    free_gift_message: String @doc(description: "Free gift message")
+    allow_notice: Boolean @doc(description: "Allow Notice")
+}
+
+type FreeGiftsButton {
+    is_show_button: Boolean @doc(description: "Add Free Gift button show or not")
+    rule_id: String @doc(description: "Free gift rule id")
+    button_label: String @doc(description: "Button Label")
+    button_color: String @doc(description: "Button Color")
+    text_color: String @doc(description: "Text Color")
+}
+
 type Rule {
     rule_id: String @doc(description: "Free gift rule id")
-    auto_add: Int @doc(description: "Free gift rule type")
+    auto_add: Boolean @doc(description: "Free gift rule type")
     max_gift: Int @doc(description: "Maximum number of allowed gifts")
     gifts: [Gift] @doc(description: "Free gift list")
     notice: String @doc(description: "Free gift rule notice")
@@ -49,7 +73,7 @@ type Gift {
     id: Int @doc(description: "Free gift id")
     name: String @doc(description: "Free gift name")
     gift_price: String @doc(description: "Free gift price")
-    free_ship: Int @doc(description: "Whether free gift has free shipping")
+    free_ship: Boolean @doc(description: "Whether free gift has free shipping")
     added: Boolean @doc(description: "Whether free gift is added to current quote")
     configurable: Boolean @doc(description: "Whether free gift is a configurable product")
     required_option: Boolean @doc(description: "Whether free gift requires custom option")
