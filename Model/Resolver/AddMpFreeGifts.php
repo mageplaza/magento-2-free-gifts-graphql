@@ -25,6 +25,7 @@ namespace Mageplaza\FreeGiftsGraphql\Model\Resolver;
 
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\GraphQl\Config\Element\Field;
+use Magento\Framework\GraphQl\Exception\GraphQlNoSuchEntityException;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Magento\Quote\Api\Data\CartInterface;
@@ -44,16 +45,28 @@ class AddMpFreeGifts implements ResolverInterface
      */
     protected $helperRule;
 
+    /**
+     * @var HelperData
+     */
     protected $helperData;
 
+    /**
+     * @var CartRule
+     */
     protected $cartRule;
 
+    /**
+     * @var FreeGiftButtonInterfaceFactory
+     */
     protected $freeGiftButton;
 
     /**
      * AddMpFreeGifts constructor.
      *
      * @param HelperRule $helperRule
+     * @param HelperData $helperData
+     * @param CartRule $cartRule
+     * @param FreeGiftButtonInterfaceFactory $freeGiftButton
      */
     public function __construct(
         HelperRule $helperRule,
@@ -72,6 +85,10 @@ class AddMpFreeGifts implements ResolverInterface
      */
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
+        if (!$this->helperData->isEnabled()) {
+            throw new GraphQlNoSuchEntityException(__('Module is disabled.'));
+        }
+
         if (!array_key_exists('model', $value) || !$value['model'] instanceof CartInterface) {
             throw new LocalizedException(__('"model" value should be specified'));
         }

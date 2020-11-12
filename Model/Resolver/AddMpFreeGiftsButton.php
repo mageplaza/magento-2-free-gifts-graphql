@@ -23,13 +23,13 @@ declare(strict_types=1);
 
 namespace Mageplaza\FreeGiftsGraphql\Model\Resolver;
 
+use Magento\Framework\GraphQl\Exception\GraphQlNoSuchEntityException;
 use Mageplaza\FreeGifts\Plugin\QuoteApi\AbstractCart;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\GraphQl\Config\Element\Field;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Magento\Quote\Api\Data\CartInterface;
-use Mageplaza\FreeGifts\Helper\Rule as HelperRule;
 use Mageplaza\FreeGifts\Api\Data\FreeGiftButtonInterface;
 
 /**
@@ -43,6 +43,10 @@ class AddMpFreeGiftsButton extends AbstractCart implements ResolverInterface
      */
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
+        if (!$this->helperData->isEnabled()) {
+            throw new GraphQlNoSuchEntityException(__('Module is disabled.'));
+        }
+
         if (!array_key_exists('model', $value) || !$value['model'] instanceof CartInterface) {
             throw new LocalizedException(__('"model" value should be specified'));
         }

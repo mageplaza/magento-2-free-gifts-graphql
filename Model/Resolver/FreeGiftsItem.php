@@ -23,6 +23,7 @@ declare(strict_types=1);
 
 namespace Mageplaza\FreeGiftsGraphql\Model\Resolver;
 
+use Magento\Framework\GraphQl\Exception\GraphQlNoSuchEntityException;
 use Magento\Quote\Api\Data\CartItemInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\GraphQl\Config\Element\Field;
@@ -31,6 +32,12 @@ use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Mageplaza\FreeGifts\Api\Data\FreeGiftItemInterface;
 use Mageplaza\FreeGifts\Plugin\QuoteApi\AbstractCartItem;
 use Mageplaza\FreeGifts\Helper\Rule as HelperRule;
+use Mageplaza\FreeGifts\Helper\Data as HelperData;
+use Magento\Quote\Model\Quote\ItemFactory;
+use Magento\Quote\Model\QuoteFactory;
+use Mageplaza\FreeGifts\Api\Data\FreeGiftItemInterfaceFactory;
+use Mageplaza\FreeGifts\Api\ProductGiftFactory;
+use Mageplaza\FreeGifts\Api\ProductGiftInterface;
 
 /**
  * Class FreeGiftsItem
@@ -39,10 +46,41 @@ use Mageplaza\FreeGifts\Helper\Rule as HelperRule;
 class FreeGiftsItem extends AbstractCartItem implements ResolverInterface
 {
     /**
+     * @var HelperData
+     */
+    protected $helperData;
+
+    /**
+     * FreeGiftsItem constructor.
+     *
+     * @param HelperRule $helperRule
+     * @param ItemFactory $itemFactory
+     * @param FreeGiftItemInterfaceFactory $freeGiftItem
+     * @param ProductGiftInterface $productGift
+     * @param QuoteFactory $quoteFactory
+     * @param HelperData $helperData
+     */
+    public function __construct(
+        HelperRule $helperRule,
+        ItemFactory $itemFactory,
+        FreeGiftItemInterfaceFactory $freeGiftItem,
+        ProductGiftInterface $productGift,
+        QuoteFactory $quoteFactory,
+        HelperData $helperData
+    ) {
+        $this->helperData = $helperData;
+        parent::__construct($helperRule, $itemFactory, $freeGiftItem, $productGift, $quoteFactory);
+    }
+
+    /**
      * @inheritdoc
      */
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
+        if (!$this->helperData->isEnabled()) {
+            throw new GraphQlNoSuchEntityException(__('Module is disabled.'));
+        }
+
         if (!array_key_exists('model', $value) || !$value['model'] instanceof CartItemInterface) {
             throw new LocalizedException(__('"model" value should be specified'));
         }
