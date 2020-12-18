@@ -1,5 +1,7 @@
 # Magento 2 Free Gifts GraphQL / PWA (FREE)
 
+Magento 2 Free Gifts will add to your customers' shopping journey a surprise and delight moment. Notably, **Magento Free Gifts GraphQL is a part of the Mageplaza Free Gift extension that adds GraphQL features; this supports PWA studio.**
+
 [Mageplaza Free Gifts for Magento 2](https://www.mageplaza.com/magento-2-free-gifts/) is a handy tool that simplifies the process of giving away free gifts to customers on the online store. 
 
 The biggest advantage of offering free gifts is to improve customer experience and boost sales. Depending on the store owners' purposes or strategies, they can provide customers with free gift when they purchase a specific product. Usually, free gifts can be used to gather customers' attention to a new product or a sale program. Free gifts are an incentive that stimulates customers' purchasing decisions and builds their retention. 
@@ -8,9 +10,7 @@ The free gifts are designed to display on the Product page and Shopping Cart pag
 
 The store admin can set the rules to reward gifts to customers based on product attributes and cart attributes. For example, if the cart's subtotal is more than $100, they will be given free gifts. 
 
-Another method is setting the conditions based on the order value of customers to apply the free gifts. In other words, it's determining the prices of gifts, which can be set in three ways: free, discount by percent, and fixed prices. For example, if one's order reaches $1000, he will get one more item free or 20% off for two items. Free shipping is another appealing gift that many customers look for when shopping online, and you can add this offer to your store's gift list on the fly. 
-
-Magento 2 Free Gifts will add to your customers' shopping journey a surprise and delight moment. Notably, **Magento Free Gifts GraphQL is a part of the Mageplaza Free Gift extension that adds GraphQL features; this supports PWA studio.** 
+Another method is setting the conditions based on the order value of customers to apply the free gifts. In other words, it's determining the prices of gifts, which can be set in three ways: free, discount by percent, and fixed prices. For example, if one's order reaches $1000, he will get one more item free or 20% off for two items. Free shipping is another appealing gift that many customers look for when shopping online, and you can add this offer to your store's gift list on the fly.  
 
 ## 1. How to install
 Run the following command in Magento 2 root folder:
