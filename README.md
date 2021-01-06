@@ -1,4 +1,4 @@
-# Magento 2 Free Gifts GraphQL / PWA (FREE)
+# Magento 2 Free Gifts GraphQL 
 
 Magento 2 Free Gifts will add to your customers' shopping journey a surprise and delight moment. Notably, **Magento Free Gifts GraphQL is a part of the Mageplaza Free Gift extension that adds GraphQL features; this supports PWA studio.**
 
