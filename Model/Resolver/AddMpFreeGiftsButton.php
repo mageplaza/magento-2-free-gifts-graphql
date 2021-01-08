@@ -21,7 +21,7 @@
 
 declare(strict_types=1);
 
-namespace Mageplaza\FreeGiftsGraphql\Model\Resolver;
+namespace Mageplaza\FreeGiftsGraphQl\Model\Resolver;
 
 use Magento\Framework\GraphQl\Exception\GraphQlNoSuchEntityException;
 use Mageplaza\FreeGifts\Plugin\QuoteApi\AbstractCart;
@@ -34,7 +34,7 @@ use Mageplaza\FreeGifts\Api\Data\FreeGiftButtonInterface;
 
 /**
  * Class AddMpFreeGiftsButton
- * @package Mageplaza\FreeGiftsGraphql\Model\Resolver
+ * @package Mageplaza\FreeGiftsGraphQl\Model\Resolver
  */
 class AddMpFreeGiftsButton extends AbstractCart implements ResolverInterface
 {

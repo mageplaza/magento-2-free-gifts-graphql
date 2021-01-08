@@ -21,7 +21,7 @@
 
 declare(strict_types=1);
 
-namespace Mageplaza\FreeGiftsGraphql\Model\Resolver;
+namespace Mageplaza\FreeGiftsGraphQl\Model\Resolver;
 
 use Magento\Framework\GraphQl\Exception\GraphQlNoSuchEntityException;
 use Magento\Quote\Api\Data\CartItemInterface;
@@ -41,7 +41,7 @@ use Mageplaza\FreeGifts\Api\ProductGiftInterface;
 
 /**
  * Class FreeGiftsItem
- * @package Mageplaza\FreeGiftsGraphql\Model\Resolver
+ * @package Mageplaza\FreeGiftsGraphQl\Model\Resolver
  */
 class FreeGiftsItem extends AbstractCartItem implements ResolverInterface
 {

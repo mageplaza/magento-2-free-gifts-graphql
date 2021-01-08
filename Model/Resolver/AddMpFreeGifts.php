@@ -21,7 +21,7 @@
 
 declare(strict_types=1);
 
-namespace Mageplaza\FreeGiftsGraphql\Model\Resolver;
+namespace Mageplaza\FreeGiftsGraphQl\Model\Resolver;
 
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\GraphQl\Config\Element\Field;
@@ -36,7 +36,7 @@ use Mageplaza\FreeGifts\Api\Data\FreeGiftButtonInterfaceFactory;
 
 /**
  * Class AddMpFreeGifts
- * @package Mageplaza\FreeGiftsGraphql\Model\Resolver
+ * @package Mageplaza\FreeGiftsGraphQl\Model\Resolver
  */
 class AddMpFreeGifts implements ResolverInterface
 {
@@ -97,7 +97,7 @@ class AddMpFreeGifts implements ResolverInterface
         $extAttr = $context->getExtensionAttributes();
 
         if ($extAttr !== null && $this->helperRule->getHelperData()->isEnabled()) {
-            $rules = $this->helperRule->setExtraData(false)->setQuote($value['model'])->getAllValidRules();
+            $rules = $this->helperRule->setExtraData(true)->setQuote($value['model'])->getAllValidRules();
         }
 
         return $rules;
