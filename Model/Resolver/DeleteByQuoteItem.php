@@ -65,7 +65,7 @@ class DeleteByQuoteItem implements ResolverInterface
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
         $this->validateArgs($args);
-        $cart = $this->_maskedCart->getCartByMaskedId((string) $args['cart_id'], $context->getUserId());
+        $cart = $this->_maskedCart->getCartByMaskedId((string) $args['cart_id'], $context);
         $result = $this->_productGift->deleteGiftByQuoteItemId($cart->getId(), $args['item_id']);
         
         if (is_object($result) && $result->getStatus() === 'error') {
